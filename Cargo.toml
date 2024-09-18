@@ -1,10 +1,9 @@
 [package]
 name = "dioxus-aws"
-version = "0.5.1"
+version = "0.5.2"
 edition = "2021"
 description = "Library for deploying Dioxus apps to AWS Serverless (AWS Lambda, S3, CloudFront, Route53)."
 licenses = "MIT"
-license-file = "LICENSE.md"
 keywords = ["dioxus", "fullstack", "aws", "serverless"]
 
 [dependencies]
