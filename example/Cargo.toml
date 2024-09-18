@@ -1,0 +1,22 @@
+[package]
+name = "example"
+version = "0.1.0"
+authors = ["hackartists <hackartists@gmail.com>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde = { version = "1.0.197", features = ["derive"] }
+
+dioxus = { version = "0.5", features = ["fullstack", "router"] }
+dioxus-aws = { version = "0.5", path="../" }
+
+# Debug
+dioxus-logger = "0.5.1"
+
+[features]
+default = []
+server = ["dioxus-aws/server"]
+lambda = ["dioxus-aws/lambda"]
+web = ["dioxus-aws/web"]
