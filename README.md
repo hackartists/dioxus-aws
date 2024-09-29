@@ -273,5 +273,5 @@ cdk bootstrap --profile $AWS_PROFILE
 cdk deploy --require-approval never --profile $AWS_PROFILE
 
 # S3 Assets sync
-aws s3 sync $PROJECT_ROOT/dist s3://$DOMAIN --delete --profile $AWS_PROFILE
+aws s3 sync $PROJECT_ROOT/dist/public s3://$DOMAIN --delete --profile $AWS_PROFILE
 ```
