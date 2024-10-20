@@ -1,6 +1,6 @@
 [package]
 name = "dioxus-aws"
-version = "0.6.0-alpha.3"
+version = "0.6.1"
 edition = "2021"
 description = "Library for deploying Dioxus apps to AWS Serverless (AWS Lambda, S3, CloudFront, Route53)."
 license = "MIT"
