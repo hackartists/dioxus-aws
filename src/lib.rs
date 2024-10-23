@@ -64,7 +64,7 @@ pub fn launch(app: fn() -> Element) {
 }
 
 #[cfg(feature = "server")]
-pub fn launch_with_layers<L>(app: fn() -> Element, layers: Vec<L>)
+pub async fn launch_with_layers<L>(app: fn() -> Element, layers: Vec<L>)
 where
     L: Layer<Route> + Clone + Send + 'static,
     L::Service: Service<Request> + Clone + Send + 'static,
@@ -90,36 +90,30 @@ where
             }
         }
 
-        tokio::runtime::Runtime::new()
-            .unwrap()
-            .block_on(async move {
-                let mut app = Router::new().serve_dioxus_application(
-                    TryIntoResult(ServeConfigBuilder::default().build()),
-                    app,
-                );
+        let mut app = Router::new()
+            .serve_dioxus_application(TryIntoResult(ServeConfigBuilder::default().build()), app);
 
-                for layer in layers {
-                    app = app.layer(layer);
-                }
+        for layer in layers {
+            app = app.layer(layer);
+        }
 
-                #[cfg(not(feature = "lambda"))]
-                {
-                    let address = dioxus_cli_config::fullstack_address_or_localhost();
-                    let listener = tokio::net::TcpListener::bind(address).await.unwrap();
+        #[cfg(not(feature = "lambda"))]
+        {
+            let address = dioxus_cli_config::fullstack_address_or_localhost();
+            let listener = tokio::net::TcpListener::bind(address).await.unwrap();
 
-                    axum::serve(listener, app.into_make_service())
-                        .await
-                        .unwrap();
-                }
+            axum::serve(listener, app.into_make_service())
+                .await
+                .unwrap();
+        }
 
-                #[cfg(feature = "lambda")]
-                {
-                    use self::lambda::LambdaAdapter;
+        #[cfg(feature = "lambda")]
+        {
+            use self::lambda::LambdaAdapter;
 
-                    tracing::info!("Running in lambda mode");
-                    lambda_runtime::run(LambdaAdapter::from(app)).await.unwrap();
-                }
-            });
+            tracing::info!("Running in lambda mode");
+            lambda_runtime::run(LambdaAdapter::from(app)).await.unwrap();
+        }
     };
 }
 
@@ -150,7 +144,7 @@ where
         self
     }
 
-    pub fn serve(self) {
-        launch_with_layers(self.app, self.layers);
+    pub async fn serve(self) {
+        launch_with_layers(self.app, self.layers).await;
     }
 }
