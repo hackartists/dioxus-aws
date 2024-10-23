@@ -1,5 +1,5 @@
 [package]
-name = "example"
+name = "basic"
 version = "0.1.0"
 authors = ["hackartists <hackartists@gmail.com>"]
 edition = "2021"
@@ -10,7 +10,7 @@ edition = "2021"
 serde = { version = "1.0.197", features = ["derive"] }
 
 dioxus = { version = "0.6.0-alpha.3", features = ["fullstack", "router"] }
-dioxus-aws = { version = "0.6.0-alpha.3", path="../" }
+dioxus-aws = { version = "0.6.0-alpha.3", path="../../" }
 
 # Debug
 dioxus-logger = "0.5.1"

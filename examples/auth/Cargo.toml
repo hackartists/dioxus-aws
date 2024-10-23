@@ -1,0 +1,30 @@
+[package]
+name = "auth"
+version = "0.1.0"
+authors = ["hackartists <hackartists@gmail.com>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde = { version = "1.0.197", features = ["derive"] }
+
+dioxus = { version = "0.6.0-alpha.3", features = ["fullstack", "router"] }
+dioxus-aws = { version = "0.6.0-alpha.3", path="../../" }
+
+# Debug
+dioxus-logger = "0.5.1"
+tower-sessions = { version = "0.12.2", optional = true }
+tower-sessions-dynamodb-store = { version = "0.2.0", optional = true }
+tokio = { version = "1.41.0", features = ["full"], optional = true }
+aws-sdk-dynamodb = { version = "1.50.0", optional = true }
+aws-config = { version = "1.5.8", optional = true }
+
+[features]
+default = []
+server = ["dioxus-aws/server","tower-sessions-dynamodb-store","tower-sessions", "tokio", "aws-sdk-dynamodb", "aws-config"]
+lambda = ["dioxus-aws/lambda"]
+web = ["dioxus-aws/web"]
+tokio = ["dep:tokio"]
+aws-sdk-dynamodb = ["dep:aws-sdk-dynamodb"]
+aws-config = ["dep:aws-config"]

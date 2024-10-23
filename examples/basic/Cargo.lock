@@ -219,6 +219,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6"
 
 [[package]]
+name = "basic"
+version = "0.1.0"
+dependencies = [
+ "dioxus",
+ "dioxus-aws",
+ "dioxus-logger",
+ "serde",
+]
+
+[[package]]
 name = "bincode"
 version = "1.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -514,16 +524,20 @@ dependencies = [
 
 [[package]]
 name = "dioxus-aws"
-version = "0.6.0-alpha.3"
+version = "0.6.1"
 dependencies = [
  "axum",
+ "axum-core",
  "dioxus",
+ "dioxus-cli-config 0.6.0-alpha.3 (git+https://github.com/DioxusLabs/dioxus.git?tag=v0.6.0-alpha.3)",
  "dioxus-fullstack",
  "http 1.1.0",
  "lambda_http",
  "lambda_runtime",
  "tokio",
  "tower 0.4.13",
+ "tower-layer",
+ "tower-service",
  "tracing",
 ]
 
@@ -532,6 +546,11 @@ name = "dioxus-cli-config"
 version = "0.6.0-alpha.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e8c43de802d959fef78aced99eb8e7f65f5ac29d19bad28ce096e2e4a42279b0"
+
+[[package]]
+name = "dioxus-cli-config"
+version = "0.6.0-alpha.3"
+source = "git+https://github.com/DioxusLabs/dioxus.git?tag=v0.6.0-alpha.3#09066dd334adfbe14da94faf789dde0561880c3d"
 
 [[package]]
 name = "dioxus-config-macro"
@@ -639,7 +658,7 @@ dependencies = [
  "base64 0.22.1",
  "bytes",
  "ciborium",
- "dioxus-cli-config",
+ "dioxus-cli-config 0.6.0-alpha.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "dioxus-devtools",
  "dioxus-interpreter-js",
  "dioxus-isrg",
@@ -779,7 +798,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e2ef1319744b87d16c80e60a401ccc66029c0ef696263a4bc920d8ec55c24ddf"
 dependencies = [
  "axum",
- "dioxus-cli-config",
+ "dioxus-cli-config 0.6.0-alpha.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "dioxus-core",
  "dioxus-devtools",
  "dioxus-document",
@@ -817,7 +836,7 @@ version = "0.6.0-alpha.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1499f1368d07ff2ee20b6647a94c4d8d63a667d31966d40af5f2c1c7099543c2"
 dependencies = [
- "dioxus-cli-config",
+ "dioxus-cli-config 0.6.0-alpha.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "dioxus-fullstack",
  "dioxus-lib",
  "dioxus-router-macro",
@@ -892,7 +911,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "68d37a24b54953fd685f35332ef52360cfda6af3139cf592ce0d6a0fe3164f38"
 dependencies = [
  "axum",
- "dioxus-cli-config",
+ "dioxus-cli-config 0.6.0-alpha.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "dioxus-devtools",
  "dioxus-fullstack",
  "dioxus-isrg",
@@ -1003,16 +1022,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ad9cdb4b747e485a12abb0e6566612956c7a1bafa3bdb8d682c5b6d403589e48"
 dependencies = [
  "num-traits",
- "serde",
-]
-
-[[package]]
-name = "example"
-version = "0.1.0"
-dependencies = [
- "dioxus",
- "dioxus-aws",
- "dioxus-logger",
  "serde",
 ]
 
