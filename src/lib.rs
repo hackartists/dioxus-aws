@@ -15,9 +15,9 @@ use tower_service::Service;
 mod lambda;
 
 #[doc = include_str!("../docs/launch.md")]
-pub fn launch(app: fn() -> Element) {
+pub fn launch(_app: fn() -> Element) {
     #[cfg(feature = "web")]
-    dioxus::launch(app);
+    dioxus::launch(_app);
 
     #[cfg(feature = "server")]
     {
@@ -39,7 +39,7 @@ pub fn launch(app: fn() -> Element) {
             .block_on(async move {
                 let app = Router::new().serve_dioxus_application(
                     TryIntoResult(ServeConfigBuilder::default().build()),
-                    app,
+                    _app,
                 );
 
                 #[cfg(not(feature = "lambda"))]
@@ -47,7 +47,7 @@ pub fn launch(app: fn() -> Element) {
                     let address = dioxus_cli_config::fullstack_address_or_localhost();
                     let listener = tokio::net::TcpListener::bind(address).await.unwrap();
 
-                    axum::serve(listener, app.into_make_service())
+                    axum::serve(listener, _app.into_make_service())
                         .await
                         .unwrap();
                 }
