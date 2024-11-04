@@ -47,7 +47,7 @@ pub fn launch(_app: fn() -> Element) {
                     let address = dioxus_cli_config::fullstack_address_or_localhost();
                     let listener = tokio::net::TcpListener::bind(address).await.unwrap();
 
-                    axum::serve(listener, _app.into_make_service())
+                    axum::serve(listener, app.into_make_service())
                         .await
                         .unwrap();
                 }
