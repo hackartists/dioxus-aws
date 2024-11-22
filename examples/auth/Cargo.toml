@@ -9,7 +9,7 @@ edition = "2021"
 [dependencies]
 serde = { version = "1.0.197", features = ["derive"] }
 
-dioxus = { version = "0.6.0-alpha.4", features = ["fullstack", "router"] }
+dioxus = { version = "0.6.0-alpha.5", features = ["fullstack", "router"] }
 dioxus-aws = { path="../../" }
 
 # Debug
