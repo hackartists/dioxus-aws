@@ -488,7 +488,7 @@ dependencies = [
 
 [[package]]
 name = "dioxus-aws"
-version = "0.6.8"
+version = "0.6.9"
 dependencies = [
  "axum",
  "axum-core",
