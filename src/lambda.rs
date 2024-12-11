@@ -80,8 +80,17 @@ where
             let headers = res.headers().clone();
             let body = Some(res.clone().into_body());
 
+            let is_base64_encoded = headers
+                .get("content-type")
+                .map(|v| {
+                    v.to_str()
+                        .map(|v| v.contains("image") || v.contains("octet-stream"))
+                        .unwrap_or(false)
+                })
+                .unwrap_or_default();
+
             let res = lambda_http::aws_lambda_events::apigw::ApiGatewayProxyResponse {
-                is_base64_encoded: false,
+                is_base64_encoded,
                 status_code,
                 headers,
                 body,
