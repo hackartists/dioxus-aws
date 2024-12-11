@@ -77,7 +77,7 @@ where
             let res = call.await?;
             let res = res.into_response().await;
             let status_code = res.status().as_u16() as i64;
-            let headers = res.headers().clone();
+            let mut headers = res.headers().clone();
             let body = Some(res.clone().into_body());
 
             let is_base64_encoded = headers
@@ -88,6 +88,14 @@ where
                         .unwrap_or(false)
                 })
                 .unwrap_or_default();
+
+            if is_base64_encoded {
+                tracing::debug!("Binary response: {} {}", method, uri);
+                headers.insert(
+                    "content-encoding",
+                    http::header::HeaderValue::from_static("base64"),
+                );
+            }
 
             let res = lambda_http::aws_lambda_events::apigw::ApiGatewayProxyResponse {
                 is_base64_encoded,
