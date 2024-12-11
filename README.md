@@ -26,7 +26,7 @@
 ## Creating a project
 
 -   Use `dx` command.
-    -   Currently, `dioxus-cli v0.5`, which is stable version of dioxus, is supported.
+    -   Currently, , which is stable version of dioxus, is supported.
 
 ```shell
 cargo install dioxus-cli --version ^0.5
