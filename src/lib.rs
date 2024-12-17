@@ -14,6 +14,11 @@ use tower_service::Service;
 #[cfg(feature = "lambda")]
 mod lambda;
 
+pub mod prelude {
+    pub use dioxus::prelude::*;
+    pub use dioxus_fullstack::prelude::*;
+}
+
 #[doc = include_str!("../docs/launch.md")]
 pub fn launch(_app: fn() -> Element) {
     #[cfg(feature = "web")]
