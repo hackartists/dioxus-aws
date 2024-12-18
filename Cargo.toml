@@ -1,6 +1,6 @@
 [package]
 name = "dioxus-aws"
-version = "0.6.12"
+version = "0.6.13"
 edition = "2021"
 description = "Library for deploying Dioxus apps to AWS Serverless (AWS Lambda, S3, CloudFront, Route53)."
 license = "MIT"
@@ -28,8 +28,8 @@ axum-core = { version = "0.4.5", optional = true }
 
 [features]
 default = []
-web = ["dioxus/web", "dioxus-fullstack/web"]
+web = ["dioxus/web", "dioxus-fullstack/web", "dioxus/fullstack"]
 server = ["dioxus/fullstack", "dioxus-fullstack/axum", "dioxus-fullstack/server", "axum", "tokio/full", "dioxus-cli-config", "axum-core", "tower-layer", "tower-service", "tokio"]
-web-release = ["web", "dioxus/fullstack"]
+web-only = ["web"]
 lambda = ["server", "tower", "lambda_http", "lambda_runtime", "http"]
 tokio = ["dep:tokio"]

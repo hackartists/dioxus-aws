@@ -242,7 +242,7 @@ export class AwsCdkStack extends cdk.Stack {
 
 ```shell
 export SERVICE=$(cargo tree | head -n 1 | awk '{print $1}')
-dx build --release --platform fullstack --client-feature web-release --server-feature lambda
+dx build --release --platform fullstack --server-feature lambda
 mv dist/$SERVICE dist/bootstrap
 ```
 
